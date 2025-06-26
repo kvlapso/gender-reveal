@@ -44,11 +44,11 @@
     </div>
 
     <!-- Vote Page -->
-    <div v-if="getURLparams('nav') === 'vote'" class="w-full flex items-center justify-center mx-auto p-6 text-2xl pt-52">
-      <div class="w-full sm:w-6/12 bg-white rounded-2xl shadow-xl p-8 gap-4 grid mt-8 top-42">
+    <div v-if="getURLparams('nav') === 'vote'" class="w-full flex items-center justify-center mx-auto p-6 text-2xl pt-28">
+      <div class="w-full md:w-6/12 bg-white rounded-2xl shadow-xl p-8 gap-4 grid mt-8 top-42">
         <h2 class="text-4xl sm:text-6xl font-bold text-center mb-8 text-gray-800">What team are you?</h2>
         
-        <form @submit.prevent="submitVote" class="grid gap-10">
+        <form @submit.prevent="submitVote" class="grid gap-10 pt-10 text-center">
           <div>
             <label for="name" class="block font-medium text-gray-700 mb-2">Your Name</label>
             <input 
@@ -62,26 +62,36 @@
             >
           </div>
 
-          <div class="grid gap-4">
-            <label class="block font-medium text-gray-700 mb-4">What do you think it will be?</label>
-            <div class="grid grid-cols-2 gap-4 text-6xl">
+          <div class="grid gap-4 text-center">
+            <label class="block font-medium text-gray-700 mb-4">Join your team!</label>
+            <div class="grid grid-cols-2 gap-4 text-4xl">
               <button 
                 type="button"
                 @click="selectedGender = 'BOY'"
                 :disabled="isSubmitting"
                 :class="selectedGender === 'BOY' ? 'bg-blue-500 text-white border-blue-500' : 'bg-white text-blue-500 border-blue-200 hover:bg-blue-50'"
-                class="p-6 border-2 rounded-xl font-bold transition-all transform hover:scale-105 disabled:opacity-50 disabled:transform-none h-62"
+                class="p-6 border-2 rounded-xl font-bold transition-all transform hover:scale-105 disabled:opacity-50 disabled:transform-none h-62 flex flex-col items-center justify-center"
               >
-                👶 Team BOY
+                <div class="text-6xl">
+                  👦🏻
+                </div>
+                <div>
+                  BOY
+                </div>
               </button>
               <button 
                 type="button"
                 @click="selectedGender = 'GIRL'"
                 :disabled="isSubmitting"
                 :class="selectedGender === 'GIRL' ? 'bg-pink-500 text-white border-pink-500' : 'bg-white text-pink-500 border-pink-200 hover:bg-pink-50'"
-                class="p-6 border-2 rounded-xl font-bold transition-all transform hover:scale-105 disabled:opacity-50 disabled:transform-none h-62"
+                class="p-6 border-2 rounded-xl font-bold transition-all transform hover:scale-105 disabled:opacity-50 disabled:transform-none h-62 flex flex-col items-center justify-center"
               >
-                👶 Team GIRL
+                <div class="text-6xl">
+                  👧🏻
+                </div>
+                <div>
+                  GIRL
+                </div>
               </button>
             </div>
           </div>
@@ -162,8 +172,8 @@
             <!-- <h3 class="text-xl font-bold text-center mb-4">Bar Chart</h3> -->
             <div class="space-y-4 w-full gap-8 grid">
               <div class="grid gap-2">
-                <div class="flex justify-between items-center mb-2">
-                  <span class="font-medium text-blue-700">👶 BOY</span>
+                <div class="flex justify-between items-center mb-2 text-2xl">
+                  <span class="font-medium text-blue-700">👦🏻 BOY</span>
                   <span class="font-bold">{{ votes.boy }} ({{ boyPercentage }}%)</span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-6">
@@ -174,8 +184,8 @@
                 </div>
               </div>
               <div class="grid gap-2">
-                <div class="flex justify-between items-center mb-2">
-                  <span class="font-medium text-pink-700">👶 GIRL</span>
+                <div class="flex justify-between items-center mb-2 text-2xl">
+                  <span class="font-medium text-pink-700">👧🏻 GIRL</span>
                   <span class="font-bold">{{ votes.girl }} ({{ girlPercentage }}%)</span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-6">
