@@ -46,7 +46,7 @@
     <!-- Vote Page -->
     <div v-if="getURLparams('nav') === 'vote'" class="w-full flex items-center justify-center mx-auto p-6 text-2xl pt-28">
       <div class="w-full md:w-6/12 bg-white rounded-2xl shadow-xl p-8 gap-4 grid mt-8 top-42">
-        <h2 class="text-4xl sm:text-6xl font-bold text-center mb-8 text-gray-800">What team are you?</h2>
+        <h2 class="text-4xl sm:text-4xl font-bold text-center mb-8 text-gray-800">🚀 Quick roll call — what team are you on?</h2>
         
         <form @submit.prevent="submitVote" class="grid gap-10 pt-10 text-center">
           <div>
@@ -113,9 +113,12 @@
         <div class="text-center mb-8 flex flex-col gap-2">
           <h2 class="text-3xl font-bold text-gray-800 mb-2">Voting Results</h2>
           <p class="text-gray-600">Total Votes: {{ totalVotes }} • Live Updates: {{ isConnected ? '🟢' : '🔴' }}</p>
-          <div v-if="isRevealed" class="flex my-10 p-4 bg-yellow-100 border border-yellow-300 rounded-lg text-center">
-            <p class="text-lg font-bold text-yellow-800 text-center w-full">
-              🎉 The gender has been revealed! It's a {{ correctGender }}! 🎉
+          <div v-if="isRevealed" class="flex my-10 p-4 rounded-lg text-center" :class="correctGender === 'BOY' ? 'bg-blue-500' : 'bg-pink-500'">
+            <p class="font-bold text-white text-center w-full text-9xl">
+              🎉 It's a {{ correctGender }}! 🎉
+
+              
+              {{ correctGender == 'BOY' ? '👦🏻' : '👧🏻' }}
             </p>
           </div>
         </div>
@@ -239,7 +242,7 @@
                 :disabled="isUpdatingSettings"
                 :class="correctGender === 'BOY' ? 'bg-blue-500 text-white border-blue-500' : 'bg-white text-blue-500 border-blue-200 hover:bg-blue-50'"
                 class="p-3 sm:p-4 md:p-6 border-2 rounded-xl font-bold transition-all disabled:opacity-50 h-52 flex items-center justify-center">
-                👶 BOY
+                👦🏻 BOY
               </button>
               <button 
                 type="button"
@@ -247,7 +250,7 @@
                 :disabled="isUpdatingSettings"
                 :class="correctGender === 'GIRL' ? 'bg-pink-500 text-white border-pink-500' : 'bg-white text-pink-500 border-pink-200 hover:bg-pink-50'"
                 class="p-3 sm:p-4 md:p-6 border-2 rounded-xl font-bold transition-all disabled:opacity-50 h-52 flex items-center justify-center">
-                👶 GIRL
+                👧🏻 GIRL
               </button>
             </div>
           </div>
