@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-500 via-purple-200 to-pink-500 text-neutral-800">
+  <div class="min-h-screen bg-gradient-to-br from-blue-500 via-purple-200 to-pink-500 text-neutral-800 p-2 sm:p-6">
     <!-- Loading Overlay -->
     <div v-if="isLoading" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div class="bg-white rounded-lg p-6 text-center">
@@ -44,13 +44,13 @@
     </div>
 
     <!-- Vote Page -->
-    <div v-if="getURLparams('nav') === 'vote'" class="w-full flex items-center justify-center mx-auto p-6 text-2xl pt-28">
+    <div v-if="getURLparams('nav') === 'vote'" class="w-full flex items-center justify-center mx-auto text-2xl pt-4 md:pt-28">
       <div class="w-full md:w-6/12 bg-white rounded-2xl shadow-xl p-8 gap-4 grid mt-8 top-42">
         <h2 class="text-4xl sm:text-4xl font-bold text-center mb-8 text-gray-800">🚀 Quick roll call — what team are you on?</h2>
         
-        <form @submit.prevent="submitVote" class="grid gap-10 pt-10 text-center">
+        <form @submit.prevent="submitVote" class="grid gap-6 pt-10 text-center text-xl sm:text-2xl">
           <div>
-            <label for="name" class="block font-medium text-gray-700 mb-2">Your Name</label>
+            <label for="name" class="block text-gray-700 mb-2">Your Name <i>or</i>  Nickname</label>
             <input 
               id="name"
               v-model="voterName" 
@@ -63,7 +63,7 @@
           </div>
 
           <div class="grid gap-4 text-center">
-            <label class="block font-medium text-gray-700 mb-4">Join your team!</label>
+            <label class="block text-gray-700 mb-4">Join your team!</label>
             <div class="grid grid-cols-2 gap-4 text-4xl">
               <button 
                 type="button"
@@ -108,7 +108,7 @@
     </div>
 
     <!-- Tally Page -->
-    <div v-if="getURLparams('nav') === 'tally'" class="w-full mx-auto p-6 mt-8 pt-28">
+    <div v-if="getURLparams('nav') === 'tally'" class="w-full mx-auto mt-8 pt-4 md:pt-28">
       <div class="bg-white rounded-2xl shadow-xl p-8 flex gap-10 flex-col">
         <div class="text-center mb-8 flex flex-col gap-2">
           <h2 class="text-3xl font-bold text-gray-800 mb-2">Voting Results</h2>
@@ -211,7 +211,7 @@
               :key="voter.id"
               class="bg-gray-50 rounded-lg p-4 flex items-center justify-between"
             >
-              <span class="font-medium">{{ voter.voter_name }}</span>
+              <span class="font-medium">{{ voter.voter_name.substr(0,4) }}*****</span>
               <span 
                 :class="voter.vote === 'BOY' ? 'text-blue-600 bg-blue-100' : 'text-pink-600 bg-pink-100'"
                 class="px-3 py-1 rounded-full text-sm font-bold"
@@ -225,12 +225,10 @@
     </div>
 
     <!-- Admin Page -->
-    <div v-if="getURLparams('nav') === '21232f297a57a5a743894a0e4a801fc3'" class="w-full mx-auto p-6 mt-8 pt-28">
+    <div v-if="getURLparams('nav') === '21232f297a57a5a743894a0e4a801fc3'" class="w-full mx-auto mt-8 pt-4 md:pt-28">
       <div class="bg-white rounded-2xl shadow-xl p-8">
-        <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Admin Panel</h2>
-        
-        <div class="space-y-6 grid gap-4 pt-20 ">
-          <div v-if="correctGender === ''" class="text-center grid gap-4 p-5 border border-gray-300 rounded-2xl">
+        <div class="space-y-6 grid gap-4 ">
+          <div v-if="correctGender === ''" class="text-center grid gap-4 rounded-2xl">
             <label class="block font-medium text-gray-700 mb-4 text-2xl">Set Gender</label>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-5xl">
               <button 
@@ -252,13 +250,15 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-2 w-full gap-4">
-            <div class="bg-gray-50 rounded-lg p-4 text-xl">
-              <p>Correct Gender: {{ correctGender ? 'HAS BEEN SET' : 'NOT SET' }}</p>
+          <div class="grid grid-cols-2 w-full gap-4 text-base sm:text-xl">
+            <div class="bg-gray-50 rounded-lg p-4 ">
+              <p>Correct Gender: <br> <span class="font-extrabold">{{ correctGender ? 'HAS BEEN SET' : 'NOT SET' }}</span></p>
+              <br>
               <p>Revealed: {{ isRevealed ? 'Yes' : 'No' }}</p>
             </div>
-            <div class="bg-gray-50 rounded-lg p-4 text-2xl">
-              <p>Total Votes: {{ voters.length }}</p>
+            <div class="bg-gray-50 rounded-lg p-4 ">
+              <p>Total Votes: <br> <span>{{ voters.length }}</span></p>
+              <br>
               <p>Database: {{ isConnected ? 'Connected' : 'Disconnected' }}</p>
             </div>
           </div>
