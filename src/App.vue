@@ -471,6 +471,7 @@ const loadVotes = async () => {
     if (error) throw error
     
     voters.value = data || []
+    isLoading.value = false
     
     // Calculate vote counts
     const boyVotes = data?.filter(vote => vote.vote === 'BOY').length || 0
@@ -561,7 +562,7 @@ onMounted(async () => {
     console.error('Error initializing app:', error)
     isConnected.value = false
   } finally {
-    isLoading.value = false
+    //
   }
 })
 
