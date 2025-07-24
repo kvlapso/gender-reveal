@@ -111,8 +111,8 @@
     <div v-if="getURLparams('nav') === 'tally'" class="w-full mx-auto mt-8 pt-4 md:pt-28">
       <div class="bg-white rounded-2xl shadow-xl p-8 flex gap-10 flex-col">
         <div class="text-center mb-8 flex flex-col gap-2">
-          <h2 class="text-3xl font-bold text-gray-800 mb-2">Voting Results</h2>
-          <p class="text-gray-600">Total Votes: {{ totalVotes }} • Live Updates: {{ isConnected ? '🟢' : '🔴' }}</p>
+          <h2 class="text-3xl font-bold text-gray-800 mb-2">Team Blue or Pink? <br>Here's what everyone thinks!</h2>
+          <p class="text-gray-600">Total Poll: {{ totalVotes }} • Live Updates: {{ isConnected ? '🟢' : '🔴' }}</p>
           <div v-if="isRevealed" class="flex my-10 p-4 rounded-lg text-center" :class="correctGender === 'BOY' ? 'bg-blue-500' : 'bg-pink-500'">
             <p class="font-bold text-white text-center w-full md:text-9xl sm:text-4xl text-2xl">
               🎉 It's a {{ correctGender == 'BOY' ? '👦🏻' : '👧🏻' }} {{ correctGender }}! 🎉
@@ -201,21 +201,23 @@
 
         <!-- Recent Voters -->
         <div class="mt-8">
-          <h3 class="text-xl font-bold mb-4">Recent Voters</h3>
+          <h3 class="text-xl font-bold mb-4">Most Recent Poll Responses</h3>
           <div v-if="voters.length === 0" class="text-center text-gray-500 py-8">
             No votes yet. Be the first to vote!
           </div>
           <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div 
+              v-show="correctGender !== '' ? voter.vote === correctGender : true"
               v-for="voter in voters" 
               :key="voter.id"
               class="bg-gray-50 rounded-lg p-4 flex items-center justify-between"
             >
-              <span class="font-medium">{{ voter.voter_name.substr(0,4) }}*****</span>
+              <span v-if="correctGender == ''" class="font-medium">**{{ voter.voter_name.substr(2,4) }}*****</span>
+              <span v-else class="font-medium">{{ voter.voter_name }}</span>
               <span 
+                v-if="isRevealed"
                 :class="voter.vote === 'BOY' ? 'text-blue-600 bg-blue-100' : 'text-pink-600 bg-pink-100'"
-                class="px-3 py-1 rounded-full text-sm font-bold"
-              >
+                class="px-3 py-1 rounded-full text-sm font-bold">
                 {{ voter.vote }}
               </span>
             </div>
