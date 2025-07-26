@@ -207,12 +207,12 @@
           </div>
           <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div 
-              v-show="correctGender !== '' ? voter.vote === correctGender : true"
+              v-show="isRevealed ? voter.vote === correctGender : true"
               v-for="voter in voters" 
               :key="voter.id"
               class="bg-gray-50 rounded-lg p-4 flex items-center justify-between"
             >
-              <span v-if="correctGender == ''" class="font-medium">**{{ voter.voter_name.substr(2,4) }}*****</span>
+              <span v-if="!isRevealed" class="font-medium">**{{ voter.voter_name.substr(2,4) }}*****</span>
               <span v-else class="font-medium">{{ voter.voter_name }}</span>
               <span 
                 v-if="isRevealed"
